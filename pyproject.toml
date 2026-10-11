@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "retrievalstress"
+version = "0.0.1"
+description = "A benchmark of how LLMs handle retrieved context that conflicts with their knowledge, contains distractors, or needs multi-hop reasoning."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Ammar Arshad" }]
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+hf = ["torch", "transformers", "accelerate"]
+wikidata = ["requests"]
+dev = ["pytest", "ruff"]
+
+[project.scripts]
+retrievalstress-generate = "retrievalstress.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"retrievalstress.data" = ["*.jsonl"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

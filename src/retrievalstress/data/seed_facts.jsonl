@@ -1,0 +1,13 @@
+{"subject": "France", "relation": "capital", "obj": "Paris", "subject_id": "Q142"}
+{"subject": "Japan", "relation": "capital", "obj": "Tokyo", "subject_id": "Q17"}
+{"subject": "Canada", "relation": "capital", "obj": "Ottawa", "subject_id": "Q16"}
+{"subject": "Kenya", "relation": "capital", "obj": "Nairobi", "subject_id": "Q114"}
+{"subject": "Peru", "relation": "capital", "obj": "Lima", "subject_id": "Q419"}
+{"subject": "Japan", "relation": "currency", "obj": "Japanese yen", "subject_id": "Q17", "obj_aliases": ["yen"]}
+{"subject": "Canada", "relation": "currency", "obj": "Canadian dollar", "subject_id": "Q16", "obj_aliases": ["dollar"]}
+{"subject": "India", "relation": "currency", "obj": "Indian rupee", "subject_id": "Q668", "obj_aliases": ["rupee"]}
+{"subject": "Pride and Prejudice", "relation": "author", "obj": "Jane Austen", "subject_id": "Q170583", "obj_aliases": ["Austen"]}
+{"subject": "Nineteen Eighty-Four", "relation": "author", "obj": "George Orwell", "subject_id": "Q208460", "obj_aliases": ["Orwell", "Eric Arthur Blair"]}
+{"subject": "Things Fall Apart", "relation": "author", "obj": "Chinua Achebe", "subject_id": "Q1196649", "obj_aliases": ["Achebe"]}
+{"subject": "Brazil", "relation": "official_language", "obj": "Portuguese", "subject_id": "Q155"}
+{"subject": "Mexico", "relation": "official_language", "obj": "Spanish", "subject_id": "Q96"}
