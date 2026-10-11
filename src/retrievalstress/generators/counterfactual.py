@@ -18,7 +18,7 @@ import random
 from collections.abc import Iterable
 
 from ..normalize import normalize
-from ..relations import RELATIONS
+from ..relations import RELATIONS, fill
 from ..schema import Fact, Item, split_for, stable_hash
 
 
@@ -65,7 +65,7 @@ def generate(
         split = split_for(key, private_fraction)
         q_id = rng.randrange(len(rel["questions"]))
         p_id = rng.randrange(len(rel["passages"]))
-        question = rel["questions"][q_id].format(s=fact.subject)
+        question = fill(rel["questions"][q_id], fact.subject)
         aliases = [fact.obj, *fact.obj_aliases]
         base = {"relation": fact.relation, "subject": fact.subject, "question_template": q_id,
                 "passage_template": p_id, "popularity": fact.popularity}
@@ -80,12 +80,12 @@ def generate(
 
         items.append(make("C0", [], None, "closed"))
         for instr in instructions:
-            support = rel["passages"][p_id].format(s=fact.subject, o=fact.obj)
+            support = fill(rel["passages"][p_id], fact.subject, fact.obj)
             items.append(make("C1-s", [support], fact.obj, instr, instruction=instr))
             for plaus in plausibilities:
                 sub = pick_substitute(fact, facts, plaus, rng)
                 if sub is None:
                     continue
-                passage = rel["passages"][p_id].format(s=fact.subject, o=sub)
+                passage = fill(rel["passages"][p_id], fact.subject, sub)
                 items.append(make("C1", [passage], sub, f"{plaus}:{instr}", instruction=instr, plausibility=plaus))
     return items

@@ -90,8 +90,11 @@ class HFModel:
 
 
 def classify(item: Item, answer: str) -> str:
-    """Label an answer as 'context', 'true' (parametric), 'both', or 'other'."""
+    """Label an answer as 'context', 'true' (parametric/gold), 'both', 'distractor' (C3), or 'other'."""
     is_true = matches(answer, item.true_aliases)
+    distractors = item.meta.get("distractor_objects") or []
+    if not is_true and distractors and matches(answer, distractors):
+        return "distractor"
     is_ctx = item.context_answer is not None and item.context_answer != item.true_answer and matches(
         answer, [item.context_answer])
     if is_true and is_ctx:
@@ -130,11 +133,13 @@ def summarize(records: list[dict], known_only: bool = True) -> dict:
             continue
         if known_only and r["meta"]["subject"] + "|" + r["meta"]["relation"] not in known:
             continue
-        groups[(r["category"], r["meta"].get("instruction"), r["meta"].get("plausibility"))].append(r)
-    for (cat, instr, plaus), rs in sorted(groups.items(), key=lambda kv: str(kv[0])):
-        name = "/".join(x for x in (cat, instr, plaus) if x)
+        m = r["meta"]
+        groups[(r["category"], m.get("relation") if r["category"] == "C4" else None, m.get("instruction"),
+                m.get("plausibility"), m.get("variant"))].append(r)
+    for parts, rs in sorted(groups.items(), key=lambda kv: str(kv[0])):
+        name = "/".join(str(x) for x in parts if x)
         stats = {"n": len(rs)}
-        for lab in ("context", "true", "both", "other"):
+        for lab in ("context", "true", "both", "distractor", "other"):
             vals = [float(r["label"] == lab) for r in rs]
             stats[lab] = sum(vals) / len(vals)
             stats[f"{lab}_ci"] = bootstrap_ci(vals)

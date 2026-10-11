@@ -44,3 +44,15 @@ src/retrievalstress/
 
 ## License
 Code: MIT. Generated data is derived from Wikidata (CC0).
+
+## v0.1 dataset
+
+`python scripts/build_dataset.py` fetches facts from Wikidata (SPARQL, cached in `cache/`), samples
+100 facts per relation (capital, currency, official language, author, place of birth, country) plus
+150 book→author→birthplace→country chains, and generates 7,500 items: C0 900, C1 2,400, C1-s 1,200,
+C2 1,200, C3 1,200, C4 600. About 18% of items fall in the hashed private split, which is written only
+to `private/` (gitignored). A hand audit of 200 random items found 5.0% serious issues and 11.0% with any
+issue: see [docs/audit.md](docs/audit.md).
+
+Evaluation runs on Kaggle (`kaggle/eval_kernel.py`) with Qwen2.5-1.5B/7B-Instruct, SmolLM2-1.7B-Instruct
+and Phi-3.5-mini-instruct. No results yet.

@@ -1,0 +1,13 @@
+{
+  "id": "ammararshad711/retrievalstress-eval-v01",
+  "title": "retrievalstress-eval-v01",
+  "code_file": "eval_kernel.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "dataset_sources": ["ammararshad711/retrievalstress-v01"],
+  "competition_sources": [],
+  "kernel_sources": []
+}

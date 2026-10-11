@@ -1,0 +1,27 @@
+{
+ "version": "v0.1",
+ "seed": 0,
+ "n_items": 7500,
+ "n_facts": 600,
+ "n_chains": 150,
+ "by_category": {
+  "C0": 900,
+  "C1-s": 1200,
+  "C1": 2400,
+  "C2": 1200,
+  "C3": 1200,
+  "C4": 600
+ },
+ "by_split": {
+  "private": 1353,
+  "public": 6147
+ },
+ "facts_by_relation": {
+  "author": 100,
+  "capital": 100,
+  "country": 100,
+  "currency": 100,
+  "official_language": 100,
+  "place_of_birth": 100
+ }
+}
